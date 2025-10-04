@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ticket Summarizer</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1>🎫 Ticket Summarizer</h1>
+                <p class="subtitle">
+                    Transform lengthy support tickets into concise summaries
+                </p>
+            </header>
+
+            <main class="main-content">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="ticketInput"
+                            >Paste your ticket content here:</label
+                        >
+                        <textarea
+                            id="ticketInput"
+                            placeholder="Enter ticket details, customer messages, or support conversations..."
+                            rows="10"
+                        ></textarea>
+                    </div>
+
+                    <div class="options-group">
+                        <div class="option">
+                            <label for="summaryType">Summary Type:</label>
+                            <select id="summaryType">
+                                <option value="brief">
+                                    Brief (2-3 sentences)
+                                </option>
+                                <option value="detailed">
+                                    Detailed (paragraph)
+                                </option>
+                                <option value="bullet">Bullet Points</option>
+                            </select>
+                        </div>
+
+                        <div class="option">
+                            <label for="priority">Priority Level:</label>
+                            <select id="priority">
+                                <option value="auto detect">Auto-detect</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="summarizeBtn" class="btn btn-primary">
+                        <span class="btn-text">Summarize Ticket</span>
+                        <div class="spinner" style="display: none"></div>
+                    </button>
+                </div>
+
+                <div class="output-section" style="display: none">
+                    <div class="summary-card">
+                        <h3>📋 Summary</h3>
+                        <div id="summaryOutput" class="summary-content"></div>
+                    </div>
+
+                    <div class="metadata-card">
+                        <h3>📊 Analysis</h3>
+                        <div class="metadata-grid">
+                            <div class="metadata-item">
+                                <span class="label">Priority:</span>
+                                <span
+                                    id="detectedPriority"
+                                    class="value priority-badge"
+                                ></span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="label">Category:</span>
+                                <span id="category" class="value"></span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="label">Sentiment:</span>
+                                <span id="sentiment" class="value"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button id="copyBtn" class="btn btn-secondary">
+                            📋 Copy Summary
+                        </button>
+                        <button id="clearBtn" class="btn btn-outline">
+                            🗑️ Clear All
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <p>&copy; 2025 Ticket Summarizer - PyCon NG</p>
+            </footer>
+        </div>
+
+        <div id="toast" class="toast" style="display: none"></div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

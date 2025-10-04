@@ -1,0 +1,28 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/app:$BUILD_ID
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - "us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/app:$BUILD_ID"
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ticket-summarizer
+      - --image
+      - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/app:$BUILD_ID
+      - --region
+      - us-central1
+      - --set-env-vars
+      - GEMINI_API_KEY=$_GEMINI_API_KEY
+
+images:
+  - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/app:$BUILD_ID
